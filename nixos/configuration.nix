@@ -91,7 +91,7 @@
       tree
     ];
     # Created using mkpasswd -m sha-512
-    hashedPassword = ";$6$pHMC3JFQHM0lqOqk$kaoDOGi1r0crtlAv4pTNipal5e9KlxuHF1dv139XtOGZDJ2VKhMkY.s/XLw9XTVLyoMYWFTDp2wcuL1.LXted0"
+    hashedPassword = "$6$pHMC3JFQHM0lqOqk$kaoDOGi1r0crtlAv4pTNipal5e9KlxuHF1dv139XtOGZDJ2VKhMkY.s/XLw9XTVLyoMYWFTDp2wcuL1.LXted0"
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOxckaOa7jjzzxywvb9f/ruG4vhdNy4xCzQ52f3WhlL5 irish@wsl-1"
     ];
