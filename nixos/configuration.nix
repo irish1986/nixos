@@ -92,9 +92,9 @@
     ];
     # Created using mkpasswd -m sha-512
     hashedPassword = "$6$jWJVLdua9W2REbSy$kZoEBsj8eYvLzyl3Khqxt16tKQkQu83nRHWZy32L9NlFurFuzESjaFjVbcJJizcqCRr3rToHAK8WLgoNBjvPD.";
-    # openssh.authorizedKeys.keys = [
-    #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOxckaOa7jjzzxywvb9f/ruG4vhdNy4xCzQ52f3WhlL5 irish@wsl-1"
-    # ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOxckaOa7jjzzxywvb9f/ruG4vhdNy4xCzQ52f3WhlL5 irish@wsl-1"
+    ];
   };
 
   # List packages installed in system profile. To search, run:
