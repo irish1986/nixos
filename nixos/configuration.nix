@@ -15,8 +15,11 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = meta.hostname;
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking = {
+    hostName = meta.hostname;
+    firewall.enable = true;
+    networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  };
 
   time.timeZone = "America/Toronto";
 
@@ -64,6 +67,7 @@
 
   environment.systemPackages = with pkgs; [
      cifs-utils
+     curl
      git
      k3s
      neofetch
@@ -71,9 +75,12 @@
      nfs-utils
   ];
 
-  services.openssh.enable = true;
-
-  networking.firewall.enable = false;
+  services = {
+    openssh = {
+      enable = true;
+      settings.PasswordAuthentication = false;
+    };
+  };
 
   system.stateVersion = "23.11";
 }
