@@ -26,7 +26,7 @@
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
-  time.timeZone = "America/Chicago";
+  time.timeZone = "America/New_York";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -41,10 +41,10 @@
   };
 
   # Fixes for longhorn
-  systemd.tmpfiles.rules = [
-    "L+ /usr/local/bin - - - - /run/current-system/sw/bin/"
-  ];
-  virtualisation.docker.logDriver = "json-file";
+  # systemd.tmpfiles.rules = [
+  #   "L+ /usr/local/bin - - - - /run/current-system/sw/bin/"
+  # ];
+  # virtualisation.docker.logDriver = "json-file";
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
@@ -91,20 +91,20 @@
       tree
     ];
     # Created using mkpasswd -m sha-512
-    hashedPassword = "$6$pHMC3JFQHM0lqOqk$kaoDOGi1r0crtlAv4pTNipal5e9KlxuHF1dv139XtOGZDJ2VKhMkY.s/XLw9XTVLyoMYWFTDp2wcuL1.LXted0"
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOxckaOa7jjzzxywvb9f/ruG4vhdNy4xCzQ52f3WhlL5 irish@wsl-1"
-    ];
+    hashedPassword = "$6$pHMC3JFQHM0lqOqk$kaoDOGi1r0crtlAv4pTNipal5e9KlxuHF1dv139XtOGZDJ2VKhMkY.s/XLw9XTVLyoMYWFTDp2wcuL1.LXted0";
+    # openssh.authorizedKeys.keys = [
+    #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOxckaOa7jjzzxywvb9f/ruG4vhdNy4xCzQ52f3WhlL5 irish@wsl-1"
+    # ];
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     neovim
-     k3s
      cifs-utils
-     nfs-utils
      git
+     k3s
+     neovim
+     nfs-utils
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
