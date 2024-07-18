@@ -25,7 +25,7 @@
           modules = [
               # Modules
 	            disko.nixosModules.disko
-	            ./hardware-configuration.nix
+	            ./hardware.nix
 	            ./disko-config.nix
 	            ./configuration.nix
 	          ];
