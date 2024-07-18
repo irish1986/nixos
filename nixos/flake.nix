@@ -11,8 +11,6 @@
   outputs = { self, nixpkgs, disko, ... }@inputs: let
     nodes = [
       "homelab-0"
-      "homelab-1"
-      "homelab-2"
     ];
   in {
     nixosConfigurations = builtins.listToAttrs (map (name: {
