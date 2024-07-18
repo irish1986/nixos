@@ -1,16 +1,33 @@
 {
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-  inputs.disko.url = "github:nix-community/disko";
-  inputs.disko.inputs.nixpkgs.follows = "nixpkgs";
+  description = "Homelab NixOS Flake";
 
-  outputs = { nixpkgs, disko, ... }:
-    {
-      nixosConfigurations.nixos-anywhere-vm = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          disko.nixosModules.disko
-          ./configuration.nix
-        ];
-      };
-    };
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
+  };
+
+  outputs = { self, nixpkgs, disko, ... }@inputs: let
+    nodes = [
+      "homelab-0"
+      "homelab-1"
+      "homelab-2"
+    ];
+  in {
+    nixosConfigurations = builtins.listToAttrs (map (name: {
+	    name = name;
+	    value = nixpkgs.lib.nixosSystem {
+     	    specialArgs = {
+            meta = { hostname = name; };
+          };
+          system = "x86_64-linux";
+          modules = [
+	            disko.nixosModules.disko
+	            ./hardware-configuration.nix
+	            ./disk-config.nix
+	            ./configuration.nix
+	          ];
+        };
+    }) nodes);
+  };
 }
