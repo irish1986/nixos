@@ -23,9 +23,9 @@
           system = "x86_64-linux";
           modules = [
 	            disko.nixosModules.disko
-	            ./hardware-configuration.nix
-	            ./disk-config.nix
 	            ./configuration.nix
+	            ./disk-config.nix
+	            ./hardware-configuration.nix
 	          ];
         };
     }) nodes);
