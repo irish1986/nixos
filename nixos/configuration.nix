@@ -29,40 +29,29 @@
     keyMap = "us";
   };
 
-  # systemd.tmpfiles.rules = [
-  #   "L+ /usr/local/bin - - - - /run/current-system/sw/bin/"
-  # ];
-  # virtualisation.docker.logDriver = "json-file";
+  users.users = {
 
-  # services.k3s = {
-  #   enable = true;
-  #   role = "server";
-  #   tokenFile = /var/lib/rancher/k3s/server/token;
-  #   extraFlags = toString ([
-	#     "--write-kubeconfig-mode \"0644\""
-	#     "--cluster-init"
-	#     "--disable servicelb"
-	#     "--disable traefik"
-	#     "--disable local-storage"
-  #   ] ++ (if meta.hostname == "homelab-0" then [] else [
-	#       "--server https://homelab-0:6443"
-  #   ]));
-  #   clusterInit = (meta.hostname == "homelab-0");
-  # };
+    root = {
+    };
 
-  # services.openiscsi = {
-  #   enable = true;
-  #   name = "iqn.2016-04.com.open-iscsi:${meta.hostname}";
-  # };
+    nixos = {
+      isNormalUser = true; 
+      description = "nixos user"; 
+      # Created using mkpasswd -m sha-512
+      hashedPassword = "$6$6klB2tIMoGV/gxz4$IEcodJRdlxb3ZtdlEc/o/XTey06UlFfGfkstrv04AAsoOi5a7FeYqhgBmXS.1i912W8WAGq3IxSIcWwfiaNCB.";
+      extraGroups = [ 
+        "networkmanager" 
+        "wheel" 
+        "docker"
+      ];
+      packages = with pkgs; [
+        tree
+      ];
+      openssh.authorizedKeys.keys = [
+        "CHANGE"
+      ];
+    };
 
-  users.users.nixos = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    packages = with pkgs; [
-      tree
-    ];
-    # Created using mkpasswd -m sha-512
-    hashedPassword = "$6$6klB2tIMoGV/gxz4$IEcodJRdlxb3ZtdlEc/o/XTey06UlFfGfkstrv04AAsoOi5a7FeYqhgBmXS.1i912W8WAGq3IxSIcWwfiaNCB.";
   };
 
   environment.systemPackages = with pkgs; [
@@ -80,6 +69,25 @@
       enable = true;
       settings.PasswordAuthentication = true;
     };
+  #   k3s = {
+  #     enable = true;
+  #     role = "server";
+  #     tokenFile = /var/lib/rancher/k3s/server/token;
+  #     extraFlags = toString ([
+  #       "--write-kubeconfig-mode \"0644\""
+  #       "--cluster-init"
+  #       "--disable servicelb"
+  #       "--disable traefik"
+  #       "--disable local-storage"
+  #     ] ++ (if meta.hostname == "homelab-0" then [] else [
+  #         "--server https://homelab-0:6443"
+  #     ]));
+  #     clusterInit = (meta.hostname == "homelab-0");
+  #   };
+  # openiscsi = {
+  #   enable = true;
+  #   name = "iqn.2016-04.com.open-iscsi:${meta.hostname}";
+  #   };
   };
 
   system.stateVersion = "23.11";
