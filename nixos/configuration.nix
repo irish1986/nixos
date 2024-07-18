@@ -119,7 +119,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  services.openssh.passwordAuthentication = true;
+  # services.openssh.passwordAuthentication = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ 80 ];
